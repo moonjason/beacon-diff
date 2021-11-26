@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Beacon Diff",
+  "name": "Beacon Decoder and Diff Checker",
   "icons": [
     {
       "src": "favicon.ico",
