@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleTabs() {
+export default function SimpleTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [text_1, setText_1] = React.useState('');
@@ -61,9 +61,11 @@ export default function SimpleTabs() {
 
   const handleTextChange_1 = (event) => {
     setText_1(event.target.value);
+    props.update("control", event.target.value);
   };
   const handleTextChange_2 = (event) => {
     setText_2(event.target.value);
+    props.update("variant", event.target.value);
   };
 
   return (
@@ -116,8 +118,8 @@ export default function SimpleTabs() {
         }}>
           <CodeDiff
             language="json"
-            originalValue={JSON.stringify({})}
-            modifiedValue={JSON.stringify({})}
+            originalValue={JSON.stringify(props.control.decoded, undefined, 2)}
+            modifiedValue={JSON.stringify(props.variant.decoded, undefined, 2)}
             options={{
               theme: "vs",
               height: "100%",
