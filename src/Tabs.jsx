@@ -6,6 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import TextField from '@material-ui/core/TextField';
 import CodeDiff from './CodeDiff';
 
 function TabPanel(props) {
@@ -51,22 +52,61 @@ const useStyles = makeStyles((theme) => ({
 export default function SimpleTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [text_1, setText_1] = React.useState('');
+  const [text_2, setText_2] = React.useState('');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const handleTextChange_1 = (event) => {
+    setText_1(event.target.value);
+  };
+  const handleTextChange_2 = (event) => {
+    setText_2(event.target.value);
   };
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="Input" {...a11yProps(0)} />
+          <Tab label="Output" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        Item One
+        <div style={{
+          width: "100%",
+          height: "90vh",
+          display: "flex"
+        }}>
+          <div style={{
+            width: "50%",
+          }}>
+            <TextField
+              id="standard-multiline-flexible"
+              label="CONTROL"
+              fullWidth
+              multiline
+              value={text_1}
+              onChange={handleTextChange_1}
+              variant="standard"
+            />
+          </div>
+          <div style={{
+            width: "50%",
+          }}>
+            <TextField
+              id="standard-multiline-flexible"
+              label="VARIANT"
+              fullWidth
+              multiline
+              value={text_2}
+              onChange={handleTextChange_2}
+              variant="standard"
+            />
+          </div>
+        </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <div style={{
@@ -94,9 +134,6 @@ export default function SimpleTabs() {
               readOnly: true
             }} />
         </div>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
       </TabPanel>
     </div>
   );
