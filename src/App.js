@@ -1,6 +1,6 @@
 import { Component } from "react";
 import "./App.css";
-import SimpleTabs from "./Tabs";
+import BasicTabs from "./Tabs";
 
 class App extends Component {
   constructor(props) {
@@ -127,7 +127,12 @@ class App extends Component {
     console.log(this.state);
     return (
       <div className="App">
-        <SimpleTabs
+        {/* <SimpleTabs
+          update={this.update}
+          control={this.state.control}
+          variant={this.state.variant}
+        /> */}
+        <BasicTabs
           update={this.update}
           control={this.state.control}
           variant={this.state.variant}

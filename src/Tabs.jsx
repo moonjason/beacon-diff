@@ -1,12 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import TextField from '@material-ui/core/TextField';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 import CodeDiff from './CodeDiff';
 
 function TabPanel(props) {
@@ -21,7 +19,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box p={3}>
+        <Box sx={{ p: 3 }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -31,8 +29,8 @@ function TabPanel(props) {
 
 TabPanel.propTypes = {
   children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
 };
 
 function a11yProps(index) {
@@ -42,15 +40,7 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
-
-export default function SimpleTabs(props) {
-  const classes = useStyles();
+export default function BasicTabs(props) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -65,15 +55,16 @@ export default function SimpleTabs(props) {
   };
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+    <Box sx={{ width: '100%' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Input" {...a11yProps(0)} />
           <Tab label="Diff" {...a11yProps(1)} />
           <Tab label="Analysis" {...a11yProps(2)} />
         </Tabs>
-      </AppBar>
+      </Box>
       <TabPanel value={value} index={0}>
+        
         <div style={{
           width: "100%",
           height: "90vh",
@@ -110,7 +101,7 @@ export default function SimpleTabs(props) {
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <div style={{
+      <div style={{
           height: "90vh",
           width: "100%",
           backgroundColor: "red"
@@ -139,6 +130,6 @@ export default function SimpleTabs(props) {
       <TabPanel value={value} index={2}>
         Automated Beacon Analysis Coming Soon...
       </TabPanel>
-    </div>
+    </Box>
   );
 }
