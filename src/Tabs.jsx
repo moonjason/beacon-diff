@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import CodeDiff from "./CodeDiff";
+import DenseTable from "./DenseTable";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -64,14 +65,13 @@ export default function BasicTabs(props) {
         >
           <Tab label="Input" {...a11yProps(0)} />
           <Tab label="Diff" {...a11yProps(1)} />
-          <Tab label="Analysis" {...a11yProps(2)} />
+          <Tab label="SDD" {...a11yProps(2)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
         <div
           style={{
             width: "100%",
-            height: "90vh",
             display: "flex",
           }}
         >
@@ -140,7 +140,30 @@ export default function BasicTabs(props) {
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Automated Beacon Analysis Coming Soon...
+        <div
+          style={{
+            width: "100%",
+            height: "90vh",
+            display: "flex",
+          }}
+        >
+          <div
+            style={{
+              width: "50%",
+              padding: "1%",
+            }}
+          >
+            <DenseTable beacon={props.control.decoded} />
+          </div>
+          <div
+            style={{
+              width: "50%",
+              padding: "1%",
+            }}
+          >
+            <DenseTable beacon={props.variant.decoded} />
+          </div>
+        </div>
       </TabPanel>
     </Box>
   );
