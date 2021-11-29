@@ -6,16 +6,27 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      control: {
+      prev_control: localStorage.prev_control ?
+      JSON.parse(localStorage.prev_control).length > 10 ?
+        JSON.parse(localStorage.prev_control).slice(JSON.parse(localStorage.prev_control).length - 10)
+        : JSON.parse(localStorage.prev_control)
+      : [],
+      prev_variant: localStorage.prev_variant ?
+      JSON.parse(localStorage.prev_variant).length > 10 ?
+        JSON.parse(localStorage.prev_variant).slice(JSON.parse(localStorage.prev_variant).length - 10)
+        : JSON.parse(localStorage.prev_variant)
+      : [],
+      control: localStorage.control ? JSON.parse(localStorage.control) : {
         raw: "",
         decoded: "",
       },
-      variant: {
+      variant: localStorage.variant ? JSON.parse(localStorage.variant) : {
         raw: "",
         decoded: "",
       },
     };
     this.decode = this.decode.bind(this);
+    this.updateStorage = this.updateStorage.bind(this);
     this.update = this.update.bind(this);
   }
   decode(beacon) {
@@ -44,13 +55,35 @@ class App extends Component {
     }
     return oCleanedVals;
   }
+  updateStorage() {
+    localStorage.prev_control = JSON.stringify(this.state.prev_control);
+    localStorage.prev_variant = JSON.stringify(this.state.prev_variant);
+    localStorage.control = JSON.stringify(this.state.control);
+    localStorage.variant = JSON.stringify(this.state.variant);
+  }
   update(controlOrVariant, beacon) {
-    this.setState({
-      [controlOrVariant]: {
-        raw: beacon,
-        decoded: this.decode(beacon),
-      },
-    });
+    if(this.state[controlOrVariant].raw.length === 0) {
+      this.setState({
+        [`prev_${controlOrVariant}`]: [
+          ...this.state[`prev_${controlOrVariant}`]
+        ],
+        [controlOrVariant]: {
+          raw: beacon,
+          decoded: this.decode(beacon),
+        },
+      }, this.updateStorage);
+    } else {
+      this.setState({
+        [`prev_${controlOrVariant}`]: [
+          ...this.state[`prev_${controlOrVariant}`],
+          this.state[controlOrVariant]
+        ],
+        [controlOrVariant]: {
+          raw: beacon,
+          decoded: this.decode(beacon),
+        },
+      }, this.updateStorage);
+    }
   }
   render() {
     console.log(this.state);

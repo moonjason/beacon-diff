@@ -52,19 +52,15 @@ const useStyles = makeStyles((theme) => ({
 export default function SimpleTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const [text_1, setText_1] = React.useState('');
-  const [text_2, setText_2] = React.useState('');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const handleTextChange_1 = (event) => {
-    setText_1(event.target.value);
+  const handleTextChange_control = (event) => {
     props.update("control", event.target.value);
   };
-  const handleTextChange_2 = (event) => {
-    setText_2(event.target.value);
+  const handleTextChange_variant = (event) => {
     props.update("variant", event.target.value);
   };
 
@@ -90,8 +86,8 @@ export default function SimpleTabs(props) {
               label="CONTROL"
               fullWidth
               multiline
-              value={text_1}
-              onChange={handleTextChange_1}
+              value={props.control.raw}
+              onChange={handleTextChange_control}
               variant="standard"
             />
           </div>
@@ -103,8 +99,8 @@ export default function SimpleTabs(props) {
               label="VARIANT"
               fullWidth
               multiline
-              value={text_2}
-              onChange={handleTextChange_2}
+              value={props.variant.raw}
+              onChange={handleTextChange_variant}
               variant="standard"
             />
           </div>
