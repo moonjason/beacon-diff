@@ -80,6 +80,7 @@ export default function SimpleTabs(props) {
         }}>
           <div style={{
             width: "50%",
+            padding: "1%"
           }}>
             <TextField
               id="standard-multiline-flexible"
@@ -93,6 +94,7 @@ export default function SimpleTabs(props) {
           </div>
           <div style={{
             width: "50%",
+            padding: "1%"
           }}>
             <TextField
               id="standard-multiline-flexible"
