@@ -1,11 +1,11 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import CodeDiff from './CodeDiff';
+import * as React from "react";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import CodeDiff from "./CodeDiff";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -36,7 +36,7 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
@@ -55,25 +55,32 @@ export default function BasicTabs(props) {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+    <Box sx={{ width: "100%" }}>
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+        >
           <Tab label="Input" {...a11yProps(0)} />
           <Tab label="Diff" {...a11yProps(1)} />
           <Tab label="Analysis" {...a11yProps(2)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        
-        <div style={{
-          width: "100%",
-          height: "90vh",
-          display: "flex"
-        }}>
-          <div style={{
-            width: "50%",
-            padding: "1%"
-          }}>
+        <div
+          style={{
+            width: "100%",
+            height: "90vh",
+            display: "flex",
+          }}
+        >
+          <div
+            style={{
+              width: "50%",
+              padding: "1%",
+            }}
+          >
             <TextField
               id="standard-multiline-flexible"
               label="CONTROL"
@@ -84,10 +91,12 @@ export default function BasicTabs(props) {
               variant="standard"
             />
           </div>
-          <div style={{
-            width: "50%",
-            padding: "1%"
-          }}>
+          <div
+            style={{
+              width: "50%",
+              padding: "1%",
+            }}
+          >
             <TextField
               id="standard-multiline-flexible"
               label="VARIANT"
@@ -101,11 +110,13 @@ export default function BasicTabs(props) {
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
-      <div style={{
-          height: "90vh",
-          width: "100%",
-          backgroundColor: "red"
-        }}>
+        <div
+          style={{
+            height: "90vh",
+            width: "100%",
+            backgroundColor: "red",
+          }}
+        >
           <CodeDiff
             language="json"
             originalValue={JSON.stringify(props.control.decoded, undefined, 2)}
@@ -116,15 +127,16 @@ export default function BasicTabs(props) {
               width: "100%",
               scrollbar: {
                 vertical: "auto",
-                horizontal: "auto"
+                horizontal: "auto",
               },
               automaticLayout: true,
               minimap: {
-                enabled: false
+                enabled: false,
               },
               enableSplitViewResizing: false,
-              readOnly: true
-            }} />
+              readOnly: true,
+            }}
+          />
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
