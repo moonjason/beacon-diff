@@ -69,7 +69,8 @@ export default function SimpleTabs(props) {
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Input" {...a11yProps(0)} />
-          <Tab label="Output" {...a11yProps(1)} />
+          <Tab label="Diff" {...a11yProps(1)} />
+          <Tab label="Analysis" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -134,6 +135,9 @@ export default function SimpleTabs(props) {
               readOnly: true
             }} />
         </div>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        Automated Beacon Analysis Coming Soon...
       </TabPanel>
     </div>
   );
