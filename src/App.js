@@ -127,11 +127,6 @@ class App extends Component {
     console.log(this.state);
     return (
       <div className="App">
-        {/* <SimpleTabs
-          update={this.update}
-          control={this.state.control}
-          variant={this.state.variant}
-        /> */}
         <BasicTabs
           update={this.update}
           control={this.state.control}
