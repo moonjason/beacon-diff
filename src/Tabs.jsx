@@ -65,7 +65,7 @@ export default function BasicTabs(props) {
         >
           <Tab label="Input" {...a11yProps(0)} />
           <Tab label="Diff" {...a11yProps(1)} />
-          <Tab label="SDD" {...a11yProps(2)} />
+          {/* <Tab label="SDD" {...a11yProps(2)} /> */}
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
