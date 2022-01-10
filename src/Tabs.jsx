@@ -135,6 +135,7 @@ export default function BasicTabs(props) {
               },
               enableSplitViewResizing: false,
               readOnly: true,
+              wordWrap: "on",
             }}
           />
         </div>
