@@ -74,7 +74,19 @@ class App extends Component {
   }
   update(controlOrVariant, beacon) {
     let decodedValue = [];
-    decodedValue.push(beacon)
+   
+    let checkBatch = beacon.split('\n') // Checks if the string has multiple events aka from batch request
+
+    if (checkBatch.length > 1) {
+      checkBatch.forEach((eventString, i) => {
+        if(eventString !== ''){
+          decodedValue.push(this.decode(eventString))
+        }
+      })
+    } else { 
+      decodedValue.push(this.decode(beacon))
+    }
+
     if (this.state[controlOrVariant].raw.length === 0) {
       this.setState(
         {
@@ -127,6 +139,11 @@ class App extends Component {
     }
     return track[str2.length][str1.length];
   }
+
+  splitEvent(fullBeacon){
+
+  }
+
   render() {
     console.log(this.state);
     return (
