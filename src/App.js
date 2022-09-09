@@ -39,6 +39,7 @@ class App extends Component {
     this.levDistance = this.levDistance.bind(this);
   }
   decode(beacon) {
+    console.log(beacon, '<=== BEACON')
     const replacedBeacon = beacon.replace(/&D=/g, "&D||");
     const aBeacon = replacedBeacon.split("&");
     //An array of the prefix to be used if found in the beacon. If a key ends with a "."
@@ -62,6 +63,7 @@ class App extends Component {
         oCleanedVals[key] = decodeURIComponent(val);
       }
     }
+    console.log(oCleanedVals, '<==== oCleanedVals')
     return oCleanedVals;
   }
   updateStorage() {
@@ -71,6 +73,8 @@ class App extends Component {
     localStorage.variant = JSON.stringify(this.state.variant);
   }
   update(controlOrVariant, beacon) {
+    let decodedValue = [];
+    decodedValue.push(beacon)
     if (this.state[controlOrVariant].raw.length === 0) {
       this.setState(
         {
@@ -79,7 +83,7 @@ class App extends Component {
           ],
           [controlOrVariant]: {
             raw: beacon,
-            decoded: this.decode(beacon),
+            decoded: decodedValue,
           },
         },
         this.updateStorage
@@ -93,7 +97,7 @@ class App extends Component {
           ],
           [controlOrVariant]: {
             raw: beacon,
-            decoded: this.decode(beacon),
+            decoded: decodedValue,
           },
         },
         this.updateStorage
