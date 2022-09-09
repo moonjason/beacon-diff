@@ -139,11 +139,7 @@ class App extends Component {
     }
     return track[str2.length][str1.length];
   }
-
-  splitEvent(fullBeacon){
-
-  }
-
+  
   render() {
     console.log(this.state);
     return (
